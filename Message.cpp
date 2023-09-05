@@ -14,7 +14,7 @@ private:
 	std::string m_message;
 
 	//реквизиты получателя:
-	int m_recipientID;					//нет необходимости?
+	int m_recipientID = 0;					//нет необходимости?
 	std::string m_messageRecipient;		//нет необходимости?
 
 public:

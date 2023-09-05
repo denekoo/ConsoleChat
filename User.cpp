@@ -46,7 +46,7 @@ public:
 		return true;
 	}
 
-	bool checkPassword(User user, int password)
+	bool checkPassword(User user, int password) ////
 	{
 			if (user.m_password == password)
 				return true;
@@ -78,7 +78,7 @@ public:
 				std::cin >> password;	// добавить проверку пароля
 				m_password = password;
 				 regCorrect = true;
-				// isAuthorized = true;	// лишняя переменная?
+				isAuthorized = true;	
 			}
 			else
 			{
