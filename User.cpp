@@ -1,15 +1,16 @@
 ﻿#pragma once
 #include<string>
 #include <iostream>
-
+#include <vector>
 
 class User
 {
 private: 
 	std::string m_userName;
 	int m_password = 0000;
-	bool isAuthorized = false;
-	//User *array[];
+	bool m_isAuthorized = false;
+	bool m_activeUser = false;
+	
 public:
 
 	User()		//	//default user; 
@@ -17,7 +18,17 @@ public:
 
 	User(std::string userName, int password): m_userName(userName), m_password(password)
 	{}
+	
+	void setName(std::string name) { m_userName = name;}
+	void setPassword(int password) { m_password = password;}
+	void setAuthStatus(bool auth)  { m_isAuthorized = auth;}
+	void setActiveUser(bool active)	{ m_activeUser = active;}
 
+	bool		 getActiveUser() { return m_activeUser;}
+	std::string  getUser()		 { return m_userName;}
+	bool		 getAuthorized() { return m_isAuthorized;}
+	int			 getPassword()	 { return m_password;}
+	
 	void showUser()
 	{
 		std::cout << "User " << m_userName << " joined to chat." << std::endl;
@@ -26,94 +37,31 @@ public:
 	{
 		m_userName = "default"; //
 		m_password = 0000;
-		isAuthorized = true;
+		m_isAuthorized = true;
 	}
 
+	//int& operator [](int index)
+	//{
+	//	return User user[index];//
+	//}
 
-	/*User& operator [](int index)
-	{
-		return *array[index];
-	}*/
+	//bool checkUser(std::vector<User> array, int lenght, std::string userName) // проверяем пользователя на совпадение имен. 
+	//															  //Если совпало-> проверку не прошел
+	//{
+	//	for (int iii = 0; iii < lenght; ++iii)
+	//	{
+	//		if (array[iii].m_userName == userName)
+	//			return false;
+	//	}
+	//	return true;
+	//}
 
-	bool checkUser(User *array, int lenght, std::string userName) // проверяем пользователя на совпадение имен. 
-																  //Если совпало-> проверку не прошел
-	{
-		for (int iii = 0; iii < lenght; ++iii)
-		{
-			if (array[iii].m_userName == userName)
-				return false;
-		}
-		return true;
-	}
-
-	bool checkPassword(User user, int password) ////
-	{
-			if (user.m_password == password)
-				return true;
-		
-		return false;
-	}
-
-	int setPassword() ////
-	{
+	
 
 
-	}
 
+	
 
-	bool userRegister( User user[], int length) // передаем массив экземпляров класса для проверки пользователя
-	{
-		std::string userName;
-		int password;
-		bool regCorrect = true;
-			while (regCorrect == false);
-		{
-			std::cout << "Enter your user name: \n";
-			std::cin >> userName;
-
-			if (checkUser(user,length, userName) == true)
-			{
-				m_userName = userName;
-				std::cout << "enter your password: \n";
-				std::cin >> password;	// добавить проверку пароля
-				m_password = password;
-				 regCorrect = true;
-				isAuthorized = true;	
-			}
-			else
-			{
-				std::cout << "A user with the same name already exists\n";
-				regCorrect = false;
-			}
-		}
-				 return regCorrect;
-	}
-
-	bool userLogin(User *user, int length)
-	{
-		std::cout << "User name: \n";
-		std::string userName;
-		std::cin >> userName;
-		if (checkUser(user, length, userName) == false)
-		{
-			std::cout << "Password: \n";
-			int password;
-			std::cin >> password;
-			if (userName == user->m_userName && password == user->m_password)
-			{
-				std::cout << "Welcome to chat! \n";
-				isAuthorized = true;
-			}
-
-			else
-			{
-				std::cout << "Incorrect password! \n";
-				isAuthorized = false;
-			}
-		}
-		else
-			std::cout << "Incorrect username! Try again.\n";
-				return isAuthorized;
-	}
+	
 
 };
