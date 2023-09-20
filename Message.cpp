@@ -51,11 +51,17 @@ public:
 
 	}
 
-	void showMessage() //  автор и тело сообщения в параметр?
+	bool showMessage() 
 	{
-		std::cout <<"User " << m_messageAuthor << " send to chat:\n";
-		std::cout << m_message << std::endl;
-		std::cout << "---------" << std::endl;
+		std::cout << "\t\t\t\t"  <<"User " << m_messageAuthor << " send to chat:\n";
+		std::cout << "\t\t\t\t"  << m_message << std::endl;
+		std::cout << "\t\t\t\t"  << "---------" << std::endl;
+		
+		if (m_message == "**") // Обеспечивает условие для выхода из чата
+		{
+			return false;
+		}
+		else return true;
 	}
 	
 

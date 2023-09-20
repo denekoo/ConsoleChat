@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 #include <iostream>
-#include "User.cpp"
-#include "Message.cpp"
 #include <vector>
 #include<ios> //used to get stream size
 #include<limits> //used to get numeric limits
+#include "User.cpp"
+#include "Message.cpp"
 
 class Chat 
 {
@@ -233,14 +233,22 @@ public:
 		}
 		else
 		{
-			std::cout << "Selected user is missing!\n Select another user.";
-			selectUser();
+			std::cout << "Selected user is missing!\n Select another user or login.";
+			 userLogin();
+			//selectUser();
 		}
 	}
 
-	void privateChat()
+	bool chatMessage(User user)
 	{
+		Message message(user.getUser());
+		m_messages.push_back(message);
+		message.writeMessage();
+		return message.showMessage();
+	}
 
+	void privateChat() //bool to end
+	{
 		std::cout << "Welcome to private chat!\n";
 		std::cout << "Users list\n";
 
@@ -250,22 +258,16 @@ public:
 
 		std::cout << "Select second user from active users list: \n";
 		User user2 = selectUser();
-		//int num = 0;
-		//while (num == 100)
+	
 		std::cout << "Write your messages right now! :^)\n";
+		std::cout << "Enter ** to leave the chat.\n";
 
-		while (m_messagesCount <= 4)
+		bool activeUser1 = true;
+		bool activeUser2 = true;
+		while (activeUser1 == true && activeUser2 == true )
 		{
-			Message message1(user1.getUser());
-			m_messages.push_back(message1);
-			message1.writeMessage();
-			message1.showMessage();
-
-			Message message2(user2.getUser());
-			m_messages.push_back(message2);
-			message2.writeMessage();
-			message2.showMessage();
-			m_messagesCount = m_messages.size();
+			 activeUser1 = chatMessage(user1);
+			 activeUser2 = chatMessage(user2);
 		}
 	}
 
@@ -275,17 +277,9 @@ public:
 
 	}
 
-	void privateRoom(User user[])
+	void publicChat()
 	{
-		std::cout << "welcome to private messages!\n";
-		bool chat;
-		while (chat = true)
-		{
-			//selectUser();
-			//writeMessage(*user);
-			//showMessage();
-
-		}
+	
 	}
 };
 
