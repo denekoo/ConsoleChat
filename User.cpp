@@ -40,21 +40,6 @@ public:
 		m_isAuthorized = true;
 	}
 
-	//int& operator [](int index)
-	//{
-	//	return User user[index];//
-	//}
-
-	//bool checkUser(std::vector<User> array, int lenght, std::string userName) // проверяем пользователя на совпадение имен. 
-	//															  //Если совпало-> проверку не прошел
-	//{
-	//	for (int iii = 0; iii < lenght; ++iii)
-	//	{
-	//		if (array[iii].m_userName == userName)
-	//			return false;
-	//	}
-	//	return true;
-	//}
 
 	
 

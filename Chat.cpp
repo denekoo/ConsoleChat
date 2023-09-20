@@ -4,15 +4,16 @@
 #include "User.cpp"
 #include "Message.cpp"
 #include <vector>
-
+#include<ios> //used to get stream size
+#include<limits> //used to get numeric limits
 
 class Chat 
 {
 private:
 	 std::vector <User> m_users;
 	int m_usersCount = 0;		
-	std::vector <Message> m_message;
-	int m_messageCount = 0;
+	std::vector <Message> m_messages;
+	int m_messagesCount = 0;
 
 public:
 	Chat()
@@ -22,11 +23,23 @@ public:
 
 	~Chat()
 	{
-	
+		
 	}
 
-	
-	
+	int numInput() // надо доработать
+	{
+		int num;
+		std::cin >> num;
+		std::cin.clear();
+		std::cin.ignore(10, '\n');
+		if (num >= 0 && num <= 9)
+			return num;
+		else
+		{
+			std::cout << " Incorrect input! Enter nuber between 0 and 9.\n";
+			numInput();
+		}
+	}
 	int getUserCounter() { return m_usersCount; }
 
 	void addUser() 
@@ -38,14 +51,16 @@ public:
 	void registrator()
 	{
 		int choice = 0;
-		m_users[0].defaultUser("default", 0000);
+		m_users[0].defaultUser("default", 0000);////
 		std::cout << "Welcome to my chat!" << std::endl;
 		std::cout << "What do you want? \n";
 
 		while (choice < 3)
 		{
 			std::cout << "Please choose the action: 1 - register, 2 - login, 3 - out of reg  \n" << std::endl;
-			std::cin >> choice;
+		
+			choice = numInput();
+		
 			switch (choice)
 			{
 			case 1:		// register
@@ -73,6 +88,8 @@ public:
 			}
 			
 			default:
+				std::cout << "Incorrect input!\n";
+				//std::cin.clear();
 				break;
 			}
 		}
@@ -94,14 +111,16 @@ public:
 	{
 		if (user.getPassword() == password)
 		{
-			user.setAuthStatus(true);
+			//user.setAuthStatus(true);
+		
 			std::cout << "Welcome to chat! \n";
 			return true;
 		}
 		else
 		{
 			std::cout << "Incorrect password! \n";
-			user.setAuthStatus(false);
+			user.setActiveUser(false);
+			//user.setAuthStatus(false);
 			return false;
 		}
 	}
@@ -126,7 +145,11 @@ public:
 				
 				regCorrect = true;
 				bool isAuthorized = true;
-				m_users[m_usersCount].setAuthStatus(isAuthorized);
+				
+				//m_users[m_usersCount].setAuthStatus(isAuthorized);
+				m_users[m_usersCount].setAuthStatus(true);
+				
+
 			}
 			else
 			{
@@ -154,6 +177,8 @@ public:
 					std::cin >> password;
 					if (checkPassword(m_users[iii], password) == true)
 					{
+						//bool b(true);
+						m_users[iii].setActiveUser(true);
 						return true;
 					}
 					else
@@ -178,32 +203,71 @@ public:
 
 		for (int index = 0; index <= m_usersCount; ++index)
 		{
-			std::cout << "User " << m_users[index].getUser();
+			std::cout << index << ". User " << m_users[index].getUser();
 
 			if (m_users[index].getAuthorized() == true)
-			{
 				std::cout << " is authorised ";
-			}
 			else
-			{
 				std::cout << " is not authorised ";
 
-			}
-			if (m_users[index].getActiveUser() == true)
-			{
-				std::cout << " - active.\n";
-			}
+				if (m_users[index].getActiveUser() == true)
+					std::cout << " - active.\n";
+				else
+					std::cout << " - not active\n";
+		}
+	}
+	User selectUser()
+	{
+		std::cout << "Enter the number:\n";
+		int userNumber = numInput();
+		
+		if (userNumber >= 0 && userNumber <= m_usersCount)
+		{
+			if(m_users[userNumber].getActiveUser() == true)
+				return m_users[userNumber];
 			else
 			{
-				std::cout << " - not active\n";
-
+				std::cout << "Selected user is not active, select another user! \n";
+				selectUser();
 			}
-
 		}
-
+		else
+		{
+			std::cout << "Selected user is missing!\n Select another user.";
+			selectUser();
+		}
 	}
 
+	void privateChat()
+	{
 
+		std::cout << "Welcome to private chat!\n";
+		std::cout << "Users list\n";
+
+		showUserList();
+		std::cout << "\nSelect first user from active users list: \n";
+		User user1 = selectUser();
+
+		std::cout << "Select second user from active users list: \n";
+		User user2 = selectUser();
+		//int num = 0;
+		//while (num == 100)
+		std::cout << "Write your messages right now! :^)\n";
+
+		while (m_messagesCount <= 4)
+		{
+			Message message1(user1.getUser());
+			m_messages.push_back(message1);
+			message1.writeMessage();
+			message1.showMessage();
+
+			Message message2(user2.getUser());
+			m_messages.push_back(message2);
+			message2.writeMessage();
+			message2.showMessage();
+			m_messagesCount = m_messages.size();
+		}
+	}
 
 
 	void changeUser()

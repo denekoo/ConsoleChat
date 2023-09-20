@@ -20,11 +20,11 @@ private:
 	bool m_isPublic=false;
 public:
 
-	Message( std:: string author, std::string message, bool isPublic)
+	Message( std:: string author)
 	{
 		m_messageAuthor = author;
-		m_message = message;
-		m_isPublic = isPublic;
+
+
 	}
 
 	Message(int authorID, std::string messageAuthor, std::string message, int recipientID, std::string messageRecipient, bool isPublic) :
@@ -39,9 +39,21 @@ public:
 
 	}
 
+	void writeMessage()
+	{
+		std::cin >> m_message;
+	}
+
+	void writeMessage(std::string messageAuthor)
+	{
+		m_messageAuthor = messageAuthor;
+		std::cin >> m_message;
+
+	}
+
 	void showMessage() //  автор и тело сообщения в параметр?
 	{
-		std::cout << m_messageAuthor << "send to chat:\n";
+		std::cout <<"User " << m_messageAuthor << " send to chat:\n";
 		std::cout << m_message << std::endl;
 		std::cout << "---------" << std::endl;
 	}

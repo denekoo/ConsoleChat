@@ -19,10 +19,10 @@ int main()
 	chat.registrator();
 
 	//			// список участников чата
-	chat.showUserList();
+	//chat.showUserList();
 
 	//			// вызов личных сообщений
-	
+	chat.privateChat();
 
 	//			// вызов общего чата
 	
