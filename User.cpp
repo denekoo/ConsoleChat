@@ -19,9 +19,9 @@ public:
 	User(std::string userName, int password): m_userName(userName), m_password(password)
 	{}
 	
-	void setName(std::string name) { m_userName = name;}
-	void setPassword(int password) { m_password = password;}
-	void setAuthStatus(bool auth)  { m_isAuthorized = auth;}
+	void setName(std::string name)  { m_userName = name;}
+	void setPassword(int password)  { m_password = password;}
+	void setAuthStatus(bool auth)   { m_isAuthorized = auth;}
 	void setActiveUser(bool active)	{ m_activeUser = active;}
 
 	bool		 getActiveUser() { return m_activeUser;}
@@ -39,14 +39,4 @@ public:
 		m_password = 0000;
 		m_isAuthorized = true;
 	}
-
-
-	
-
-
-
-	
-
-	
-
 };

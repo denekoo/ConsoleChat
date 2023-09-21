@@ -22,9 +22,9 @@ int main()
 	//chat.showUserList();
 
 	//			// вызов личных сообщений
-	chat.privateChat();
+	//chat.privateChat();
 
 	//			// вызов общего чата
-	
+	chat.chat();
 	return 0;
 }

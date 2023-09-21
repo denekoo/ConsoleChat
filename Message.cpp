@@ -14,29 +14,21 @@ private:
 	//тело сообщения:
 	std::string m_message;
 
-	//реквизиты получателя:
-	int m_recipientID = 0;					//нет необходимости?
-	std::string m_messageRecipient;		//нет необходимости?
-	bool m_isPublic=false;
+
 public:
+	Message(int authorID, std::string messageAuthor, std::string message) :
+		m_authorID(authorID), m_messageAuthor(messageAuthor), m_message(message)
+	{
+	}
+
+	Message( std::string messageAuthor, std::string message) :
+		 m_messageAuthor(messageAuthor), m_message(message)
+	{
+	}
 
 	Message( std:: string author)
 	{
 		m_messageAuthor = author;
-
-
-	}
-
-	Message(int authorID, std::string messageAuthor, std::string message, int recipientID, std::string messageRecipient, bool isPublic) :
-		m_authorID(authorID), m_messageAuthor(messageAuthor), m_message(message),
-		m_recipientID(recipientID), m_messageRecipient(messageRecipient), m_isPublic(isPublic)
-	{
-
-	}
-	Message(int authorID, std::string messageAuthor, std::string message) :
-		m_authorID(authorID), m_messageAuthor(messageAuthor), m_message(message)
-	{
-
 	}
 
 	void writeMessage()
@@ -63,6 +55,4 @@ public:
 		}
 		else return true;
 	}
-	
-
 };

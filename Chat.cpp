@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <vector>
-#include<ios> //used to get stream size
-#include<limits> //used to get numeric limits
+#include <ios> //used to get stream size
+#include <limits> //used to get numeric limits
 #include "User.cpp"
 #include "Message.cpp"
 
@@ -26,7 +26,7 @@ public:
 		
 	}
 
-	int numInput() // надо доработать
+	int numInput() 
 	{
 		int num;
 		std::cin >> num;
@@ -45,7 +45,7 @@ public:
 	void addUser() 
 	{
 		++m_usersCount;
-		m_users.resize(m_usersCount+1); //+1 добавляем для корректной работы с m_usersCount 
+		m_users.resize( m_usersCount + 1 ); //+1 добавляем для корректной работы с m_usersCount 
 	}
 
 	void registrator()
@@ -120,7 +120,6 @@ public:
 		{
 			std::cout << "Incorrect password! \n";
 			user.setActiveUser(false);
-			//user.setAuthStatus(false);
 			return false;
 		}
 	}
@@ -146,10 +145,7 @@ public:
 				regCorrect = true;
 				bool isAuthorized = true;
 				
-				//m_users[m_usersCount].setAuthStatus(isAuthorized);
-				m_users[m_usersCount].setAuthStatus(true);
-				
-
+				m_users[m_usersCount].setAuthStatus(true);		
 			}
 			else
 			{
@@ -177,7 +173,6 @@ public:
 					std::cin >> password;
 					if (checkPassword(m_users[iii], password) == true)
 					{
-						//bool b(true);
 						m_users[iii].setActiveUser(true);
 						return true;
 					}
@@ -235,7 +230,6 @@ public:
 		{
 			std::cout << "Selected user is missing!\n Select another user or login.";
 			 userLogin();
-			//selectUser();
 		}
 	}
 
@@ -264,6 +258,7 @@ public:
 
 		bool activeUser1 = true;
 		bool activeUser2 = true;
+
 		while (activeUser1 == true && activeUser2 == true )
 		{
 			 activeUser1 = chatMessage(user1);
@@ -277,9 +272,25 @@ public:
 
 	}
 
-	void publicChat()
+	void chat()
 	{
+		std::cout << "Welcome to  chat!\n";
+		std::cout << "Users list\n";
+
+		showUserList();
+
+		std::cout << "\nSelect first user from active users list: \n";
+		std::cout << "Write your messages right now! :^)\n";
+		std::cout << "Enter ** to leave the chat.\n";
+
+		bool activeUser1 = true;
 	
+		while (activeUser1 == true )
+		{
+		User user = selectUser();
+		std::cout << "write your message:\n";
+		activeUser1 = chatMessage(user);
+		}
 	}
 };
 
