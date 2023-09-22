@@ -1,32 +1,18 @@
-﻿#pragma once
+﻿#include "Chat.h"
 
-#include <iostream>
-#include <vector>
-#include <ios> //used to get stream size
-#include <limits> //used to get numeric limits
-#include "User.cpp"
-#include "Message.cpp"
 
-class Chat 
-{
-private:
-	 std::vector <User> m_users;
-	int m_usersCount = 0;		
-	std::vector <Message> m_messages;
-	int m_messagesCount = 0;
 
-public:
-	Chat()
+	Chat::Chat()
 	{
 		m_users.resize(m_usersCount+1);
 	}
 
-	~Chat()
+	Chat::~Chat()
 	{
 		
 	}
 
-	int numInput() 
+	int  Chat::numInput()
 	{
 		int num;
 		std::cin >> num;
@@ -40,19 +26,19 @@ public:
 			numInput();
 		}
 	}
-	int getUserCounter() { return m_usersCount; }
+	int Chat::getUserCounter() { return m_usersCount; }
 
-	void addUser() 
+	void Chat::addUser()
 	{
 		++m_usersCount;
 		m_users.resize( m_usersCount + 1 ); //+1 добавляем для корректной работы с m_usersCount 
 	}
 
-	void registrator()
+	void Chat::registrator()
 	{
 		int choice = 0;
 		m_users[0].defaultUser("default", 0000);////
-		std::cout << "Welcome to my chat!" << std::endl;
+		std::cout << "Registrator." << std::endl;
 		std::cout << "What do you want? \n";
 
 		while (choice < 3)
@@ -96,7 +82,7 @@ public:
 		std::cout << "Done!\n";
 	}
 
-	bool checkUser(std::string userName) // Проверяем пользователя на совпадение имен. 
+	bool Chat::checkUser(std::string userName) // Проверяем пользователя на совпадение имен. 
 										 //  Если совпало-> проверку не прошел
 	{
 		for (int iii = 0; iii <= m_usersCount; ++iii)
@@ -107,7 +93,7 @@ public:
 		return true;
 	}
 
-	bool checkPassword(User user, int password) ////
+	bool Chat::checkPassword(User user, int password) ////
 	{
 		if (user.getPassword() == password)
 		{
@@ -124,7 +110,7 @@ public:
 		}
 	}
 
-	bool userRegister() 
+	bool Chat::userRegister()
 	{
 		std::string userName;
 		int password;
@@ -156,7 +142,7 @@ public:
 		return regCorrect;
 	}
 
-	bool userLogin() 
+	bool Chat::userLogin()
 	{
 		std::cout << "User name: \n";
 		std::string userName;
@@ -192,7 +178,7 @@ public:
 		}
 	}
 	
-	void showUserList()
+	void Chat::showUserList()
 	{
 		std::cout << "List of chat participants: \n";
 
@@ -211,7 +197,7 @@ public:
 					std::cout << " - not active\n";
 		}
 	}
-	User selectUser()
+	User Chat::selectUser()
 	{
 		std::cout << "Enter the number:\n";
 		int userNumber = numInput();
@@ -233,7 +219,7 @@ public:
 		}
 	}
 
-	bool chatMessage(User user)
+	bool Chat::chatMessage(User user)
 	{
 		Message message(user.getUser());
 		m_messages.push_back(message);
@@ -241,7 +227,7 @@ public:
 		return message.showMessage();
 	}
 
-	void privateChat() //bool to end
+	void Chat::privateChat() //bool to end
 	{
 		std::cout << "Welcome to private chat!\n";
 		std::cout << "Users list\n";
@@ -267,12 +253,12 @@ public:
 	}
 
 
-	void changeUser()
+	void Chat::changeUser()
 	{
 
 	}
 
-	void chat()
+	void Chat::chat()
 	{
 		std::cout << "Welcome to  chat!\n";
 		std::cout << "Users list\n";
@@ -292,7 +278,7 @@ public:
 		activeUser1 = chatMessage(user);
 		}
 	}
-};
+
 
 
 
