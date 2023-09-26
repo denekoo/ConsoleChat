@@ -149,9 +149,7 @@
 		std::cout << "User name: \n";
 		std::string userName;
 		std::cin >> userName;
-		int tryCounter = 0; // ограничитель количества попыток логина
-		while (tryCounter <= 3)
-		{
+	
 			if (checkUser(userName) == false) // false - есть совпадение имен
 			{
 
@@ -171,7 +169,7 @@
 						{
 							std::cout << "Try again." << std::endl;
 							userLogin();
-							++tryCounter;
+							
 						}
 					}
 				}
@@ -180,11 +178,9 @@
 
 			else
 			{
-				std::cout << "Incorrect username! Try again.\n";
-				++tryCounter;
+				std::cout << "Incorrect username! Try again.\n";	
 				return false;
 			}
-		}
 	}
 	
 	void Chat::showUserList()
@@ -205,6 +201,7 @@
 				else
 					std::cout << " - not active\n";
 		}
+		std::cout << std::endl;
 	}
 	User Chat::selectUser()
 	{
@@ -262,11 +259,6 @@
 	}
 
 
-	void Chat::changeUser()
-	{
-
-	}
-
 	void Chat::chat()
 	{
 		std::cout << "Welcome to  chat!\n";
@@ -287,8 +279,6 @@
 		activeUser1 = chatMessage(user);
 		}
 	}
-
-
 
 
 

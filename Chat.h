@@ -31,7 +31,6 @@ public:
 	User selectUser();
 	bool chatMessage(User user);
 	void privateChat();
-	void changeUser();///
 	void chat();
 };
 
