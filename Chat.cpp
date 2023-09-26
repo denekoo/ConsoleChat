@@ -115,6 +115,7 @@
 		std::string userName;
 		int password;
 		bool regCorrect = true;
+
 		while (regCorrect == false);
 		{
 			std::cout << "Enter your user name: \n";
@@ -138,6 +139,7 @@
 				std::cout << "A user with the same name already exists\n";
 				regCorrect = false;
 			}
+			
 		}
 		return regCorrect;
 	}
@@ -147,34 +149,41 @@
 		std::cout << "User name: \n";
 		std::string userName;
 		std::cin >> userName;
-		if (checkUser(userName) == false) // false - есть совпадение имен
+		int tryCounter = 0; // ограничитель количества попыток логина
+		while (tryCounter <= 3)
 		{
-
-			for (int iii = 0; iii <= m_usersCount; ++iii)
+			if (checkUser(userName) == false) // false - есть совпадение имен
 			{
-				if (m_users[iii].getUser() == userName)
+
+				for (int iii = 0; iii <= m_usersCount; ++iii)
 				{
-					std::cout << "Password: \n";
-					int password;
-					std::cin >> password;
-					if (checkPassword(m_users[iii], password) == true)
+					if (m_users[iii].getUser() == userName)
 					{
-						m_users[iii].setActiveUser(true);
-						return true;
-					}
-					else
-					{
-						std::cout << "Try again." << std::endl;
-						userLogin();
+						std::cout << "Password: \n";
+						int password;
+						std::cin >> password;
+						if (checkPassword(m_users[iii], password) == true)
+						{
+							m_users[iii].setActiveUser(true);
+							return true;
+						}
+						else
+						{
+							std::cout << "Try again." << std::endl;
+							userLogin();
+							++tryCounter;
+						}
 					}
 				}
+				return false;
 			}
-					return false;
-		}
-		else
-		{
-			std::cout << "Incorrect username! Try again.\n";	
-			return false;
+
+			else
+			{
+				std::cout << "Incorrect username! Try again.\n";
+				++tryCounter;
+				return false;
+			}
 		}
 	}
 	

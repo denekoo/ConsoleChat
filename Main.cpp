@@ -10,10 +10,17 @@
 //	// отправка сообщений лично -  сделал
 //	// вывод списка пользователей - сделал
 //	// вывод всех сообщений пользователя - надо ли?
+//	// сделать выход из логина
+//	// вывод нескольких слов в сообщ
+
 
 int main()
 {
 	Chat chat;
+
+	bool mainChat = true;
+	while (mainChat == true)
+	{
 	std::cout << "Welcome to my chat!" << std::endl;
 	std::cout << "Please enter your choose:		 \n " 
 			  << "1 - Registrator;				 \n "
@@ -23,9 +30,6 @@ int main()
 			  << "9 - Exit						 \n "
 			  << std::endl;
 
-	bool mainChat = true;
-	while (mainChat == true)
-	{
 		switch (chat.numInput())
 		{
 		//			// вызов регистартора

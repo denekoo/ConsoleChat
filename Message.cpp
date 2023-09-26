@@ -17,14 +17,17 @@
 	}
 
 	void Message::writeMessage()
-	{
-		std::cin >> m_message;
+	{	
+		std::getline(std::cin, m_message);
 	}
 
-	void Message::writeMessage(std::string messageAuthor)
+	void Message::writeMessage(std::string messageAuthor) // not work
 	{
 		m_messageAuthor = messageAuthor;
 		std::cin >> m_message;
+
+		std::getline(std::cin, m_message);
+	
 	}
 
 	bool Message::showMessage()
