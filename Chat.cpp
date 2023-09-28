@@ -97,8 +97,6 @@
 	{
 		if (user.getPassword() == password)
 		{
-			//user.setAuthStatus(true);
-		
 			std::cout << "Welcome to chat! \n";
 			return true;
 		}
@@ -126,7 +124,7 @@
 				addUser();
 				m_users[m_usersCount].setName(userName);
 				std::cout << "enter your password: \n";
-				std::cin >> password;	// добавить проверку пароля
+				std::cin >> password;	
 				m_users[m_usersCount].setPassword(password);
 				
 				regCorrect = true;
