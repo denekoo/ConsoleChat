@@ -75,7 +75,7 @@
 			
 			default:
 				std::cout << "Incorrect input!\n";
-				//std::cin.clear();
+				
 				break;
 			}
 		}
