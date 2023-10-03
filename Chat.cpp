@@ -1,7 +1,5 @@
 ﻿#include "Chat.h"
 
-
-
 	Chat::Chat()
 	{
 		m_users.resize(m_usersCount+1);
@@ -12,7 +10,26 @@
 		
 	}
 
-	int  Chat::numInput()
+	int  Chat::numInput() // функция с проверкой ввода
+	{
+		int num;
+		bool f = true;
+		while (f)
+		{
+			std::cout << "Enter your choice: \n" << std::endl;
+			std::cin >> num;
+			if (!std::cin) {
+				std::cout << "It`s not a digit" << std::endl;
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				f = true;
+			}
+			else f = false;
+		}
+		return num;
+	}
+
+	/*int  Chat::numInput()
 	{
 		int num;
 		std::cin >> num;
@@ -23,9 +40,9 @@
 		else
 		{
 			std::cout << " Incorrect input! Enter nuber between 0 and 9.\n";
-			numInput();
+			return numInput();
 		}
-	}
+	}*/
 	int Chat::getUserCounter() { return m_usersCount; }
 
 	void Chat::addUser()
@@ -166,8 +183,7 @@
 						else
 						{
 							std::cout << "Try again." << std::endl;
-							userLogin();
-							
+							return userLogin();
 						}
 					}
 				}
@@ -201,7 +217,7 @@
 		}
 		std::cout << std::endl;
 	}
-	User Chat::selectUser()
+	User Chat::selectUser()///
 	{
 		std::cout << "Enter the number:\n";
 		int userNumber = numInput();
@@ -213,13 +229,16 @@
 			else
 			{
 				std::cout << "Selected user is not active, select another user! \n";
-				selectUser();
+				return selectUser();
 			}
 		}
 		else
 		{
-			std::cout << "Selected user is missing!\n Select another user or login.";
-			 userLogin();
+			std::cout << "Selected user is missing!\n Please login and select correct user.\n";
+			userLogin();
+
+			std::cout << "Select correct user:\n";
+			return selectUser();
 		}
 	}
 
