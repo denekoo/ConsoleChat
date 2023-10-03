@@ -29,7 +29,7 @@
 		return num;
 	}
 
-	/*int  Chat::numInput()
+	/*int  Chat::numInput() // старая функция, не совсем корректно работала
 	{
 		int num;
 		std::cin >> num;
@@ -217,7 +217,12 @@
 		}
 		std::cout << std::endl;
 	}
-	User Chat::selectUser()///
+
+
+	// поправил функцию, добавил функцию логина в случае непраильного выбора номера пользователя 
+	// добавил возврат Usera вызывающей функции 
+
+	User Chat::selectUser()
 	{
 		std::cout << "Enter the number:\n";
 		int userNumber = numInput();
